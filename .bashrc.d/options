@@ -1,0 +1,8 @@
+# Automatically fix typos in cd
+shopt -s cdspell
+# Check for jobs before exiting
+shopt -s checkjobs
+# Update LINES and COLUMNS on window resize
+shopt -s checkwinsize
+# Make ** pattern recursive
+shopt -s globstar

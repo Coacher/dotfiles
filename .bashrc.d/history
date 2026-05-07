@@ -1,0 +1,23 @@
+# Append to the history file instead of overwriting it
+shopt -s histappend
+# Save multiline commands as a single entry
+shopt -s cmdhist
+# Save multiline commands as separate lines
+shopt -s lithist
+
+# Session history size
+readonly HISTSIZE='10000'
+# Storage history size
+readonly HISTFILESIZE='1000000'
+# Save and display history timestamps
+readonly HISTTIMEFORMAT='%F %T '
+
+# Ignore repeated commands and commands starting with a space
+readonly HISTCONTROL='ignoreboth'
+# Ignore specific patterns
+export   HISTIGNORE="ls:ll:la:ls *:ll *:la *:man *"
+export   HISTIGNORE="$HISTIGNORE:*reboot*:*poweroff*:*shutdown*:rm -rf*"
+readonly HISTIGNORE
+
+# Save new history lines before showing the command prompt
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"

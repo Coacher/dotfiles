@@ -1,0 +1,5 @@
+export PROJECT_HOME="$HOME/Projects"
+export WORKON_HOME="$HOME/.virtualenvs"
+
+export VIRTUALENVWRAPPER_HOOK_DIR="$HOME/.virtualenvwrapper"
+export VIRTUALENVWRAPPER_WORKON_CD=1

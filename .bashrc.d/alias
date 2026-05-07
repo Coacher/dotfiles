@@ -1,0 +1,16 @@
+alias ..='cd ..'
+alias ...='cd ../..'
+
+alias grep='grep --color=auto'
+alias grepc='grep --color=always'
+alias rgc='rg --color=always'
+
+alias ls='ls   -Fv --group-directories-first --color=auto'
+alias ll='ls  -lFv --group-directories-first --color=auto'
+alias la='ls -lAFv --group-directories-first --color=auto'
+
+alias tf='tail --lines=5 --follow'
+
+alias vim='vimx'
+
+alias dnf-user-installed='dnf repoquery --installed --queryformat="%{reason}: %{full_nevra}\n" | rg --color=never "^User:"'

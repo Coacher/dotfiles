@@ -1,0 +1,1 @@
+export LESS='-i -M -R --use-color'

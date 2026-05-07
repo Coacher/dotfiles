@@ -1,0 +1,11 @@
+readonly COLOR_RED='\[\e[91m\]'
+readonly COLOR_YELLOW='\[\e[93m\]'
+readonly COLOR_BLUE_BOLD='\[\e[1;94m\]'
+readonly COLOR_RESET='\[\e[0m\]'
+readonly PROMPT_SYMBOL='\$'
+
+if [ $EUID -eq 0 ]; then
+    PS1="[${COLOR_RED}\u@\h${COLOR_RESET}: ${COLOR_BLUE_BOLD}\w${COLOR_RESET}]${COLOR_BLUE_BOLD}${PROMPT_SYMBOL}${COLOR_RESET} "
+else
+    PS1="[${COLOR_YELLOW}\u@\h${COLOR_RESET}: ${COLOR_BLUE_BOLD}\W${COLOR_RESET}]${COLOR_BLUE_BOLD}${PROMPT_SYMBOL}${COLOR_RESET} "
+fi

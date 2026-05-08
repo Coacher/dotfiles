@@ -1,0 +1,4 @@
+--exclude=@/home/coacher/.wildignore
+--sort=yes
+--extras=+fq
+--fields=+aeilmnS

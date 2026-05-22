@@ -1,0 +1,33 @@
+set line-graphics = utf-8
+set vertical-split = yes
+set tab-size = 4
+set diff-highlight = yes
+set ignore-case = smart-case
+set mouse = yes
+
+set main-view = \
+    line-number:no \
+    date:default,local=yes \
+    id:yes \
+    author:no \
+    commit-title:graph=v1,refs=yes,overflow=no
+set diff-view = \
+    line-number:no \
+    text:yes,commit-title-overflow=yes
+
+bind generic <LessThan>  none
+bind generic <Backspace> back
+bind generic <Space>     enter
+bind generic -           none
+bind generic j           next
+bind generic k           previous
+bind generic <Up>        move-up
+bind generic <Down>      move-down
+
+color cursor-blur  white   color28
+color date         cyan    black
+color graph-commit yellow  black
+
+color "---"        cyan    black
+color diff-stat    cyan    black
+color "index "     magenta black

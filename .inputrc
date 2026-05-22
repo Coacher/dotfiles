@@ -1,0 +1,49 @@
+# Enable non-ASCII encodings
+set convert-meta off
+set input-meta on
+set output-meta on
+
+
+# Disable all bells
+set bell-style none
+# When a bracket is inserted, briefly jump to the matching one
+set blink-matching-paren on
+# Use colors to highlight the common prefix of completions
+set colored-completion-prefix on
+# Use colors to highlight the filetypes of completions
+set colored-stats on
+# Display a trailing slash after symlinked directories
+set mark-symlinked-directories on
+# Match hidden files only when a leading dot was typed
+set match-hidden-files off
+# Disable pager when listing completions
+set page-completions off
+# List all completions with a single Tab
+set show-all-if-ambiguous on
+# Keep matching characters after the cursor in completions
+set skip-completed-text on
+# Use symbols to highlight the filetypes of completions
+set visible-stats on
+
+
+$if mode=emacs
+# Linux console
+# Make Home/End move to the start/end of the line
+"\e[1~": beginning-of-line
+"\e[4~": end-of-line
+# Make PageUp/PageDown search the history
+"\e[5~": history-search-backward
+"\e[6~": history-search-forward
+# Make Delete delete characters
+"\e[3~": delete-char
+# Make Insert start overwrite mode
+"\e[2~": overwrite-mode
+
+# Konsole and xterm
+# Make Home/End move to the start/end of the line
+"\e[H": beginning-of-line
+"\e[F": end-of-line
+# Make Ctrl-Left/Ctrl-Right move between words
+"\e[1;5D": backward-word
+"\e[1;5C": forward-word
+$endif

@@ -1,0 +1,44 @@
+Include /etc/ssh/sshd_config.d/*.conf
+
+AddressFamily inet
+ListenAddress 0.0.0.0
+Port 22
+
+AuthenticationMethods publickey
+AuthorizedKeysFile .ssh/authorized_keys
+GSSAPIAuthentication no
+HostbasedAuthentication no
+KbdInteractiveAuthentication no
+KerberosAuthentication no
+PasswordAuthentication no
+PubkeyAuthentication yes
+RequiredRSASize 3072
+
+LoginGraceTime 30
+MaxAuthTries 3
+MaxStartups 10:50:50
+PerSourceMaxStartups 3
+PerSourceNetBlockSize 24:64
+
+AcceptEnv COLORTERM LANG LC_*
+PrintLastLog yes
+PrintMotd yes
+
+ClientAliveCountMax 10
+ClientAliveInterval 60
+TCPKeepAlive no
+
+Banner none
+Compression no
+ExposeAuthInfo no
+GatewayPorts no
+IgnoreRhosts yes
+IgnoreUserKnownHosts yes
+PermitEmptyPasswords no
+PermitRootLogin prohibit-password
+PermitUserEnvironment no
+PermitUserRC no
+StrictModes yes
+UseDNS no
+UsePAM yes
+VersionAddendum none

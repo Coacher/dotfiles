@@ -14,6 +14,10 @@ iptables -t filter -Z && iptables -t nat -Z
 #-----------------------------------------------------------------------------
 # Обрабатываем ICMP пакеты
 iptables -N icmp_process
+# Блокируем фрагментированные ICMP пакеты
+iptables -A icmp_process -p icmp -f -j DROP
+# Блокируем чрезмерно большие ICMP пакеты
+iptables -A icmp_process -p icmp -m length --length 1500: -j DROP
 # Пропускаем ICMP Echo Reply
 iptables -A icmp_process -p icmp --icmp-type  0 -j RETURN
 # Пропускаем ICMP Destination Unreachable
@@ -30,6 +34,8 @@ iptables -A icmp_process -j DROP
 iptables -N tcp_process
 # Блокируем попытки открыть TCP соединение TCP пакетом с некорректными флагами
 iptables -A tcp_process -m conntrack --ctstate NEW,RELATED -p tcp ! --syn -j DROP
+# Блокируем попытки открыть TCP соединение фрагментированным TCP пакетом
+iptables -A tcp_process -m conntrack --ctstate NEW,RELATED -p tcp -f -j DROP
 # Пропускаем остальные TCP пакеты
 iptables -A tcp_process -j RETURN
 

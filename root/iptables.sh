@@ -1,6 +1,9 @@
 #!/usr/bin/bash
 # См. 'man 8 iptables-extensions'
 
+IS_ROUTER="$(sysctl -n net.ipv4.ip_forward)"
+IS_SERVER="$(hostnamectl chassis|grep -cE '^(server|vm|container)$')"
+
 
 #-----------------------------------------------------------------------------
 # Удаляем все правила
@@ -41,6 +44,7 @@ iptables -A tcp_process -m conntrack --ctstate NEW,RELATED -p tcp -f -j DROP
 iptables -A tcp_process -j RETURN
 
 
+if [ "${IS_SERVER}" -eq 1 ]; then
 #-----------------------------------------------------------------------------
 # Обрабатываем обнаруженную атаку
 iptables -N dos_drop
@@ -64,6 +68,7 @@ iptables -A dos_process -m recent --name dos --update --seconds 500 --hitcount 2
 iptables -A dos_process -m recent --name dos_detain_zone --rcheck --seconds 86400 -j dos_drop
 # Регистрируем для анализа и пропускаем остальные пакеты
 iptables -A dos_process -m recent --set --name dos -j RETURN
+fi
 
 
 #-----------------------------------------------------------------------------
@@ -90,18 +95,18 @@ iptables -A INPUT -m addrtype --dst-type MULTICAST -j DROP
 
 
 #-----------------------------------------------------------------------------
-# Блокируем все входящие пакеты на клиентских устройствах
-if ! [[ "$(hostnamectl chassis)" =~ ^(server|vm|container) ]]; then
-    iptables -A INPUT -j DROP
-else
 # Производим анализ попыток атак на серверных устройствах
+if [ "${IS_SERVER}" -eq 1 ]; then
     iptables -A INPUT -j dos_process
+else
+# Блокируем все входящие пакеты на клиентских устройствах
+    iptables -P INPUT DROP
 fi
 
 
 #-----------------------------------------------------------------------------
 # Заменяем в исходящих пакетах адрес источника на адрес интерфейса
-if [ "$(sysctl -n net.ipv4.ip_forward)" -eq 1 ]; then
+if [ "${IS_ROUTER}" -eq 1 ]; then
     while read -r addr name; do
         iptables -t nat -A POSTROUTING -o "${name}" -j SNAT --to-source "${addr%/*}"
     done < <(

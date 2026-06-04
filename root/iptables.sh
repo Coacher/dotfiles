@@ -89,7 +89,7 @@ iptables -A INPUT -m addrtype --dst-type MULTICAST -j DROP
 
 #-----------------------------------------------------------------------------
 # Производим анализ попыток атак
-iptables -A INPUT -p tcp -j dos_process
+iptables -A INPUT -j dos_process
 
 
 #-----------------------------------------------------------------------------

@@ -22,7 +22,7 @@ PerSourceNetBlockSize 24:64
 
 AcceptEnv COLORTERM LANG LC_*
 PrintLastLog yes
-PrintMotd yes
+PrintMotd no
 
 ClientAliveCountMax 10
 ClientAliveInterval 60

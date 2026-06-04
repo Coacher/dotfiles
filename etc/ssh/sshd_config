@@ -42,3 +42,5 @@ StrictModes yes
 UseDNS no
 UsePAM yes
 VersionAddendum none
+
+Subsystem sftp internal-sftp

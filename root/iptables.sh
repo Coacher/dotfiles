@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-# See 'man 8 iptables-extensions'
+# См. 'man 8 iptables-extensions'
 
 
 #-----------------------------------------------------------------------------
@@ -28,6 +28,7 @@ iptables -A icmp_process -p icmp --icmp-type  8 -j RETURN
 iptables -A icmp_process -p icmp --icmp-type 11 -j RETURN
 # Блокируем остальные ICMP пакеты
 iptables -A icmp_process -j DROP
+
 
 #-----------------------------------------------------------------------------
 # Обрабатываем TCP пакеты
@@ -87,9 +88,15 @@ iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -m addrtype --src-type MULTICAST -j DROP
 iptables -A INPUT -m addrtype --dst-type MULTICAST -j DROP
 
+
 #-----------------------------------------------------------------------------
-# Производим анализ попыток атак
-iptables -A INPUT -j dos_process
+# Блокируем все входящие пакеты на клиентских устройствах
+if ! [[ "$(hostnamectl chassis)" =~ ^(server|vm|container) ]]; then
+    iptables -A INPUT -j DROP
+else
+# Производим анализ попыток атак на серверных устройствах
+    iptables -A INPUT -j dos_process
+fi
 
 
 #-----------------------------------------------------------------------------

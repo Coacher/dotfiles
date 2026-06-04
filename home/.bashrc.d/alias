@@ -11,6 +11,15 @@ alias la='ls -lAFv --group-directories-first --color=auto'
 
 alias tf='tail --lines=5 --follow'
 
-alias vim='vimx'
+if which vimx > /dev/null 2>&1; then
+    alias vim='vimx'
+fi
 
-alias dnf-user-installed='dnf repoquery --installed --queryformat="%{reason}: %{full_nevra}\n" | rg --color=never "^User:"'
+if which apt-get > /dev/null 2>&1; then
+    alias apt-sysupdate='apt-get update && apt-get dist-upgrade && apt-get autoremove && apt-get autoclean'
+fi
+
+if which dnf > /dev/null 2>&1; then
+    alias dnf-sysupdate='dnf upgrade --refresh && dnf autoremove && dnf check'
+    alias dnf-user-installed='dnf repoquery --installed --queryformat="%{reason}: %{full_nevra}\n"|rg --color=never "^User:"'
+fi

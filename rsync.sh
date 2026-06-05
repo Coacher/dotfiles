@@ -2,7 +2,7 @@
 
 set -e
 
-CMD="rsync -rlp -Ic --existing -i"
+CMD="rsync -rl -Ic --existing -i"
 ${CMD} --dry-run "${1}" "${2}"
 
 read -r -p "Proceed? (y/N): " ANSWER

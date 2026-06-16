@@ -1,2 +1,6 @@
-export DENO_INSTALL="$HOME/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
+DENO_DIR="$HOME/.deno"
+
+if [ -d "${DENO_DIR}" ]; then
+    export DENO_INSTALL="${DENO_DIR}"
+    export PATH="${DENO_DIR}/bin:$PATH"
+fi

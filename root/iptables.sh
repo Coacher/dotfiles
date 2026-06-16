@@ -44,7 +44,7 @@ iptables -A tcp_process -m conntrack --ctstate NEW,RELATED -p tcp -f -j DROP
 iptables -A tcp_process -j RETURN
 
 
-if [ "${IS_SERVER}" -eq 1 ]; then
+if [ "${IS_ROUTER}" -eq 0 ] && [ "${IS_SERVER}" -eq 1 ]; then
 #-----------------------------------------------------------------------------
 # Обрабатываем обнаруженную атаку
 iptables -N dos_drop
@@ -95,9 +95,14 @@ iptables -A INPUT -m addrtype --dst-type MULTICAST -j DROP
 
 
 #-----------------------------------------------------------------------------
+# Определяем поведение по умолчанию
+if [ "${IS_ROUTER}" -eq 1 ]; then
+# Разрешаем все входящие пакеты на роутерах
+    iptables -P INPUT -j ACCEPT
+elif [ "${IS_SERVER}" -eq 1 ]; then
 # Производим анализ попыток атак на серверных устройствах
-if [ "${IS_SERVER}" -eq 1 ]; then
     iptables -A INPUT -j dos_process
+    iptables -P INPUT -j ACCEPT
 else
 # Блокируем все входящие пакеты на клиентских устройствах
     iptables -P INPUT DROP

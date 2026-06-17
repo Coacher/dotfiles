@@ -98,11 +98,11 @@ iptables -A INPUT -m addrtype --dst-type MULTICAST -j DROP
 # Определяем поведение по умолчанию
 if [ "${IS_ROUTER}" -eq 1 ]; then
 # Разрешаем все входящие пакеты на роутерах
-    iptables -P INPUT -j ACCEPT
+    iptables -P INPUT ACCEPT
 elif [ "${IS_SERVER}" -eq 1 ]; then
 # Производим анализ попыток атак на серверных устройствах
     iptables -A INPUT -j dos_process
-    iptables -P INPUT -j ACCEPT
+    iptables -P INPUT ACCEPT
 else
 # Блокируем все входящие пакеты на клиентских устройствах
     iptables -P INPUT DROP

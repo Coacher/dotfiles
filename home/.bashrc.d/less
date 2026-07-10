@@ -1,1 +1,1 @@
-export LESS='-i -M -R --use-color'
+export LESS='-i -M -R --search-options=W --use-color'

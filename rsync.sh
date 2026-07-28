@@ -2,18 +2,13 @@
 
 set -e
 
-CMD="rsync -rl -Ic --existing -i"
-${CMD} --dry-run "${1}" "${2}"
+SRC="${1}"
+TGT="${2}"
 
-read -r -p "Proceed? (y/N): " ANSWER
-case "${ANSWER:-N}" in
-    [yY])
-        ${CMD} --stats "${1}" "${2}"
-        ;;
-    [nN])
-        echo "Aborting per user request."
-        ;;
-    *)
-        echo "Invalid input. Please enter 'y' or 'n'."
-        ;;
-esac
+rclone check "${SRC}" "${TGT}" \
+    --one-way --links --log-file /dev/null --combined - | \
+    rg -v '^=' | sort -k 2
+
+rclone copy "${SRC}" "${TGT}" \
+    --checksum --links --metadata --no-update-dir-modtime --no-update-modtime \
+    --log-file /dev/null --interactive

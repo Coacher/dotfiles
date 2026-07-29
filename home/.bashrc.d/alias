@@ -17,7 +17,7 @@ fi
 
 if which apt-get > /dev/null 2>&1; then
     alias apt-sysupdate='apt-get update && apt-get dist-upgrade && apt-get autoremove && apt-get autoclean'
-    alias apt-user-installed="apt-mark showmanual|xargs -r dpkg-query -W -f='${Package} ${Version}.${Architecture}\n'|column -t"
+    alias apt-user-installed='apt-mark showmanual|xargs -r dpkg-query -W -f='\''${Package} ${Version}.${Architecture}\n'\''|column -t'
 fi
 
 if which dnf > /dev/null 2>&1; then

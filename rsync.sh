@@ -1,9 +1,9 @@
 #!/usr/bin/bash
 
-set -e
+set -eu
 
-SRC="${1}"
-TGT="${2}"
+SRC="${1:?usage: ${0##*/} SRC TGT}"
+TGT="${2:?usage: ${0##*/} SRC TGT}"
 
 rclone check "${SRC}" "${TGT}" \
     --one-way --links \

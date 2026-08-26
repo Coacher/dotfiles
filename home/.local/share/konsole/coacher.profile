@@ -2,6 +2,10 @@
 ColorScheme=Linux
 Font=JetBrains Mono ExtraLight,11,-1,5,200,0,0,0,0,0,0,0,0,0,0,1,Regular
 UseFontLineChararacters=true
+WordMode=false
+WordModeAscii=false
+WordModeAttr=false
+WordModeBrahmic=false
 
 [General]
 AlternatingBackground=0

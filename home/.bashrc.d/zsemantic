@@ -1,0 +1,74 @@
+# Emitted protocol: OSC 133 L/A/P/B/C/D semantic prompt boundaries.
+#   L                 ensure the next prompt starts on a fresh line
+#   A;cl=line;aid=PID start a command; enable line-local click movement
+#   P;k=i / P;k=s     start a primary / secondary prompt
+#   B                 end the prompt and start user input
+#   C                 end user input and start command output
+#   D;[STATUS];aid=PID finish the command; status is omitted if none ran
+# BEL terminates each OSC sequence.
+
+# Shell integration only meaningful in an interactive Bash session.
+[[ -n ${BASH_VERSION-} && $- == *i* ]] || return 0
+
+# Linux virtual consoles and minimal terminals do not implement
+# OSC shell integration and may display the bytes as garbage.
+case ${TERM-} in
+    dumb | linux)
+        return 0
+        ;;
+esac
+
+# Existing OSC prompt markup is sufficient evidence that semantic shell
+# integration is already enabled, including when this file is re-sourced.
+if [[ ${PS0-}${PS1-}${PS2-} == *']133;'* ||
+      ${PS0-}${PS1-}${PS2-} == *']633;'* ]]; then
+    SEMANTIC_SHELL_INTEGRATION_STATUS='skipped:integration-enabled'
+    return 0
+fi
+
+# PS0 needs normal prompt expansion to emit the pre-execution marker. Respect
+# an explicit user decision to disable promptvars rather than overriding it.
+if ! shopt -q promptvars; then
+    SEMANTIC_SHELL_INTEGRATION_STATUS='skipped:promptvars-disabled'
+    return 0
+fi
+
+# This is the integration's only persistent bookkeeping variable.
+unset __ssi_command_marker
+
+__ssi_precmd() {
+    local status=$?
+    local start='\[\e]133;P;k=i\a\]'
+    local continuation='\[\e]133;P;k=s\a\]'
+    local end='\[\e]133;B\a\]'
+
+    # The marker is unset before the first prompt, empty after a prompt
+    # with no command, and contains C after PS0 expands for a command.
+    if [[ -v __ssi_command_marker ]]; then
+        printf '\e]133;D;%s;aid=%s\a' "${__ssi_command_marker:+$status}" "$$"
+    fi
+    __ssi_command_marker=''
+
+    printf '\e]133;L\a\e]133;A;cl=line;aid=%s\a' "$$"
+
+    # Strip our own wrapper before reapplying it. This keeps prompts dynamic
+    # without retaining the original and wrapped copies in global variables.
+    PS1=${PS1#"$start"}
+    PS1=${PS1%"$end"}
+    PS1=$start$PS1$end
+    PS2=${PS2#"$continuation"}
+    PS2=${PS2%"$end"}
+    PS2=$continuation$PS2$end
+    return "$status"
+}
+
+# PS0 expands only when Bash is about to execute input. Its deferred assignment
+# both emits C and records that D should include the command's exit status.
+printf -v PS0 '${__ssi_command_marker:=%s}%s' $'\e]133;C\a' "${PS0-}"
+
+# Bash 5.1+ executes indexed PROMPT_COMMAND elements natively in numeric order.
+# Append our hook so existing hooks retain Bash's native $? and PIPESTATUS
+# behavior, while prompt generators run before we add the semantic markup.
+declare -ga PROMPT_COMMAND
+PROMPT_COMMAND+=('__ssi_precmd')
+SEMANTIC_SHELL_INTEGRATION_STATUS='active'

@@ -18,6 +18,7 @@ SemanticInputClick=true
 TerminalRows=30
 
 [Interaction Options]
+AutoCopySelectedText=true
 ColorFilterEnabled=false
 CopyTextAsHTML=false
 TrimTrailingSpacesInSelectedText=true

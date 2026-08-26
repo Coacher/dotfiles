@@ -25,9 +25,9 @@ bind generic <Up>        move-up
 bind generic <Down>      move-down
 
 color cursor-blur  white   color28
-color date         cyan    black
-color graph-commit yellow  black
+color date         cyan    default
+color graph-commit yellow  default
 
-color "---"        cyan    black
-color diff-stat    cyan    black
-color "index "     magenta black
+color "---"        cyan    default
+color diff-stat    cyan    default
+color "index "     magenta default

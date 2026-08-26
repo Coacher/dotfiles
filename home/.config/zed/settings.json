@@ -1,0 +1,148 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "default_open_behavior": "new_window",
+  "status_bar": {
+    "line_endings_button": true,
+    "active_encoding_button": "enabled"
+  },
+  "cli_default_open_behavior": "new_window",
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    }
+  },
+  "git_panel": {
+    "dock": "left"
+  },
+  "vim": {
+    "use_smartcase_find": true,
+    "default_mode": "insert"
+  },
+  "inline_code_actions": false,
+  "rounded_selection": false,
+  "cursor_shape": "block",
+  "cursor_blink": false,
+  "multi_cursor_modifier": "cmd_or_ctrl",
+  "agent_buffer_font_size": 13.0,
+  "buffer_line_height": "standard",
+  "buffer_font_family": "JetBrains Mono",
+  "buffer_font_features": {
+    "calt": false
+  },
+  "tabs": {
+    "show_close_button": "always"
+  },
+  "title_bar": {
+    "show_onboarding_banner": false,
+    "show_branch_status_icon": true,
+    "show_sign_in": false,
+    "show_user_picture": false
+  },
+  "collaboration_panel": {
+    "dock": "left",
+    "button": false
+  },
+  "notification_panel": {
+    "button": false
+  },
+  "outline_panel": {
+    "dock": "right"
+  },
+  "project_panel": {
+    "show_diagnostics": "off",
+    "dock": "left",
+    "drag_and_drop": false,
+    "entry_spacing": "standard"
+  },
+  "terminal": {
+    "scrollbar": {
+      "show": "never"
+    }
+  },
+  "git": {
+    "blame": {
+      "show_avatar": false
+    },
+    "inline_blame": {
+      "enabled": false
+    }
+  },
+  "calls": {
+    "mute_on_join": true
+  },
+  "agent": {
+    "sidebar_side": "right",
+    "inline_assistant_model": {
+      "provider": "openrouter",
+      "model": "anthropic/claude-opus-5",
+      "enable_thinking": false
+    },
+    "dock": "right",
+    "favorite_models": [
+      {
+        "provider": "openrouter",
+        "model": "anthropic/claude-opus-5",
+        "enable_thinking": true
+      },
+      {
+        "provider": "openrouter",
+        "model": "openai/gpt-5.6-terra",
+        "enable_thinking": true
+      },
+      {
+        "provider": "openrouter",
+        "model": "openai/gpt-5.6-sol",
+        "enable_thinking": true
+      }
+    ],
+    "default_model": {
+      "enable_thinking": true,
+      "provider": "openrouter",
+      "model": "anthropic/claude-opus-5"
+    },
+    "model_parameters": [],
+    "enable_feedback": false
+  },
+  "search": {
+    "regex": true
+  },
+  "use_smartcase_search": true,
+  "middle_click_paste": false,
+  "show_whitespaces": "boundary",
+  "use_autoclose": false,
+  "toolbar": {
+    "code_actions": true
+  },
+  "scrollbar": {
+    "selected_symbol": false,
+    "selected_text": false,
+    "git_diff": false
+  },
+  "gutter": {
+    "runnables": false,
+    "folds": false
+  },
+  "drag_and_drop_selection": {
+    "enabled": false
+  },
+  "show_signature_help_after_edits": true,
+  "scroll_beyond_last_line": "vertical_scroll_margin",
+  "session": {
+    "restore_unsaved_buffers": false
+  },
+  "restore_on_startup": "none",
+  "icon_theme": "Zed (Default)",
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "vim_mode": true,
+  "theme": "Zenburn"
+}

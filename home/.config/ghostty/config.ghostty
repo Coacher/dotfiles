@@ -1,0 +1,30 @@
+# Cursor configuration.
+cursor-style = block
+cursor-style-blink = false
+cursor-click-to-move = true
+shell-integration-features = no-cursor
+
+# Sensible scrolling speed.
+mouse-scroll-multiplier = discrete:2,precision:1
+
+# 'Unlimited' scrollback (1 GB).
+scrollback-limit = 1073741824
+
+# Disable scrollbars.
+scrollbar = never
+
+# Inherit working directory for new sessions.
+window-inherit-working-directory = true
+tab-inherit-working-directory = true
+split-inherit-working-directory = true
+
+# Default terminal size.
+window-height = 30
+window-width = 110
+
+# Copy selection to clipboard and trim trailing spaces.
+clipboard-trim-trailing-spaces = true
+copy-on-select = clipboard
+
+# Use intense palette for bold text.
+bold-color = bright

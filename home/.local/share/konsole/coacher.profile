@@ -6,6 +6,7 @@ WordMode=false
 WordModeAscii=false
 WordModeAttr=false
 WordModeBrahmic=false
+WordModeCoding=false
 
 [General]
 AlternatingBackground=0
@@ -31,3 +32,4 @@ ScrollBarPosition=2
 [Terminal Features]
 BlinkingTextEnabled=false
 FlowControlEnabled=false
+KittyKeyboardEnabled=true

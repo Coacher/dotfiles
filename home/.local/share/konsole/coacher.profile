@@ -1,6 +1,6 @@
 [Appearance]
 ColorScheme=Linux
-Font=JetBrains Mono ExtraLight,11,-1,5,200,0,0,0,0,0,0,0,0,0,0,1,Regular
+Font=JetBrains Mono ExtraLight,12,-1,5,200,0,0,0,0,0,0,0,0,0,0,1,Regular,0,0
 UseFontLineChararacters=true
 WordMode=false
 WordModeAscii=false

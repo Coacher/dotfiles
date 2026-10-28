@@ -53,6 +53,8 @@ Date:   %ad%n\
 	defaultBranch = master
 [interactive]
 	diffFilter = diff-highlight
+[merge]
+	ff = only
 [mergetool]
 	keepBackup = false
 [pager]

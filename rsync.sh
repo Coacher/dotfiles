@@ -6,7 +6,7 @@ SRC="${1:?usage: ${0##*/} SRC TGT}"
 TGT="${2:?usage: ${0##*/} SRC TGT}"
 
 SRC=$(realpath -e "${SRC}")
-TGT=$(realpath -E "${TGT}")
+TGT=$(realpath "${TGT}")
 
 rclone check "${SRC}" "${TGT}" \
     --one-way --links \

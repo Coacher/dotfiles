@@ -7,6 +7,7 @@ APT::Get::Show-Versions "true";
 APT::Get::Upgrade-Allow-New "true";
 APT::Install-Recommends "false";
 APT::Install-Suggests "false";
+APT::Periodic::AutocleanInterval "7";
 Acquire::AllowDowngradeToInsecureRepositories "false";
 Acquire::AllowInsecureRepositories "false";
 Acquire::AllowWeakRepositories "false";

@@ -1,6 +1,8 @@
+Unattended-Upgrade::Allow-APT-Mark-Fallback "false";
+Unattended-Upgrade::Allow-Downgrade "false";
 Unattended-Upgrade::AutoFixInterruptedDpkg "true";
-Unattended-Upgrade::Automatic-Reboot "true";
-Unattended-Upgrade::Automatic-Reboot-Time "04:00";
-Unattended-Upgrade::Automatic-Reboot-WithUsers "false";
 Unattended-Upgrade::MinimalSteps "true";
 Unattended-Upgrade::SyslogEnable "true";
+Unattended-Upgrade::Automatic-Reboot "true";
+Unattended-Upgrade::Automatic-Reboot-Time "03:00";
+Unattended-Upgrade::Automatic-Reboot-WithUsers "false";
